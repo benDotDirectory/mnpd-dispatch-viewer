@@ -35,6 +35,14 @@
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
 
+            <Label
+                x:Name="ResultsArea"
+                Text="Waiting for results..."
+                SemanticProperties.HeadingLevel="Level3"
+                SemanticProperties.Description="Result placeholder"
+                FontSize="12"
+                HorizontalOptions="Center" />
+
         </VerticalStackLayout>
     </ScrollView>
  

@@ -1,24 +1,25 @@
-﻿namespace mnpd_dispatch_viewer;
+﻿using mnpd_dispatch_viewer.Services;
+
+namespace mnpd_dispatch_viewer;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	RestService restService;
 
 	public MainPage()
 	{
 		InitializeComponent();
+
+		restService = new RestService();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private async void OnCounterClicked(object sender, EventArgs e)
 	{
-		count++;
+		var items = await restService.RefreshDataAsync();
+		var output = $"Address: {items[0].Address}\nCall Received: {items[0].Call_Received}\nCity: {items[0].City}\nIncident Type: {items[0].Incident_Type}\nType Code: {items[0].Incident_Type_Code}" +
+            $"\nLast Updated: {items[0].Last_Updated}";
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
+		ResultsArea.Text = output;
 	}
 }
 
